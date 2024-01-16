@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Question and Answer{% endblock %}
+
+{% load gravatar %}
+
+
+{% block body %}
+
+<div class="card text-center">
+    <div class="card-body">
+        <h5 class="card-title h1">{{ question }}</h5>
+        {% for ans in answers %}
+        <div>
+            <div class="list-group w-auto">
+                <a class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                    <img class="rounded-circle flex-shrink-0">{% gravatar user.email 30 %}</img>
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div>
+                            <p class="mb-0 opacity-75">
+                                {{ ans.answer_text }}
+                            </p>
+                        </div>
+                        <small class="opacity-50 text-nowrap">{{ans.ans_date}}</small>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+<div class="Ans text-center">
+    <h1>Add Answer</h1>
+    <form method="post" action="{% url 'ques_ans' question.id%}">
+        {% csrf_token %}
+        <label for="answer_text">Answer:</label><br>
+        <textarea id="answer_text" name="answer_text" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock body %}

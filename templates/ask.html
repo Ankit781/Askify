@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Ask Question{% endblock %}
+
+
+{% block body %}
+
+<form action="{% url 'index' %}" method="POST">
+    {% csrf_token %}
+    <div>
+        <label for="question" class="mt-4 text-center"><h1> Question </h1></label>
+        <input type="text" class="form-control mt-4" id="question" name="question" placeholder="Enter Question">
+    </div>
+    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+</form>
+
+{% endblock body %}
